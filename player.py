@@ -1,3 +1,4 @@
+"""the class for the player which inherits from the avatar class"""
 from avatar import Avatar
 import os
 import pygame
@@ -17,29 +18,6 @@ class Player(Avatar):
         self.playerModelRight = pygame.transform.scale(self.playerModelRight, (40,50))
         self.playerCurrent = self.playerModelRight
 
-    def draw(self,screen):
-        """draws player character to the screen"""
-        # a rectangle object will contain our player image, at the coordinates specificed and the dimensions specified
-        p1 = pygame.Rect((100,300), (40,50))
-        # 'bit' places an object onto the screen based on coordinates from the top left corner
-        screen.blit(self.playerCurrent, ((self.position[0],self.position[1]), (40,50)))
-    
-    def move(self):
-        """allows for player movement via keypresses"""
-        # this checks for any pressed keys and includes held keys
-        if pygame.key.get_pressed()[pygame.K_UP]:
-            # changes position based on set speed of player
-            self.position[1] -= self.moveSpeed 
-            # updates character sprite to reflect direction
-            self.playerCurrent = self.playerModelUp
-        elif pygame.key.get_pressed()[ pygame.K_DOWN]:
-            self.position[1] += self.moveSpeed 
-            self.playerCurrent = self.playerModelDown
-        elif pygame.key.get_pressed()[ pygame.K_LEFT]:
-            self.position[0] -= self.moveSpeed 
-            self.playerCurrent = self.playerModelLeft
-        elif pygame.key.get_pressed()[ pygame.K_RIGHT]:
-            self.position[0] += self.moveSpeed 
-            self.playerCurrent = self.playerModelRight
+
 
 
