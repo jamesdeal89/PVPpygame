@@ -1,7 +1,7 @@
 import pygame
 
 class Avatar():
-    def __init__(self, health = 100, attack = 25, moveSpeed = 10, position = [160,120], color = (0,0,0), width=100) -> None:
+    def __init__(self, health = 100, attack = 25, moveSpeed = 4, position = [160,120], color = (0,0,0), width=20) -> None:
         self.health = health
         self.attack = attack
         self.moveSpeed = moveSpeed
