@@ -1,4 +1,3 @@
-from cv2 import circle
 from enemy import Enemy
 from player import Player
 import pygame
