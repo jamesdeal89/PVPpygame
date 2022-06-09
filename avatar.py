@@ -27,17 +27,18 @@ class Avatar():
         """allows for player movement via keypresses"""
         # this checks for any pressed keys and includes held keys
         # I have changed the key press values to variables set in the init to allow for both player classes to change it
-        if pygame.key.get_pressed()[self.up]:
+        # it also prevents players from leaving the border by checking if moving would make them exit the dimensions of the window.
+        if pygame.key.get_pressed()[self.up] and self.position[1] - self.moveSpeed > 0:
             # changes position based on set speed of player
             self.position[1] -= self.moveSpeed 
             # updates character sprite to reflect direction
             self.playerCurrent = self.playerModelUp
-        elif pygame.key.get_pressed()[self.down]:
+        elif pygame.key.get_pressed()[self.down] and self.position[1] + self.moveSpeed < 450:
             self.position[1] += self.moveSpeed 
             self.playerCurrent = self.playerModelDown
-        elif pygame.key.get_pressed()[self.left]:
+        elif pygame.key.get_pressed()[self.left] and self.position[0] - self.moveSpeed > 0:
             self.position[0] -= self.moveSpeed 
             self.playerCurrent = self.playerModelLeft
-        elif pygame.key.get_pressed()[self.right]:
+        elif pygame.key.get_pressed()[self.right] and self.position[0] + self.moveSpeed < 850:
             self.position[0] += self.moveSpeed 
             self.playerCurrent = self.playerModelRight
