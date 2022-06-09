@@ -1,16 +1,18 @@
 from enemy import Enemy
 from player import Player
+from obstacle import Obstacle
 import pygame
 
 width, height = 900,500
 # creates the basic pygame display box
 screen = pygame.display.set_mode((width,height))
-pygame.display.set_caption("PYTHON RPG")
-
+# names the title of the display box
+pygame.display.set_caption("PYTHON PVP")
 
 def main():
     player = Player()
     enemy = Enemy()
+    obstacle = Obstacle()
     run = True
     while run == True:
         # this creates a framerate of 60 frames per second
@@ -21,6 +23,7 @@ def main():
                 run = False
         # pygame colors use RGB tuples, this is white
         screen.fill((255,255,255))
+        obstacle.create(screen)
         enemy.move()
         player.move()
         enemy.draw(screen)
