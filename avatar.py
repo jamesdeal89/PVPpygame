@@ -23,22 +23,33 @@ class Avatar():
         screen.blit(self.playerCurrent, ((self.position[0],self.position[1]), (40,50)))
     
 
-    def move(self):
+    def move(self, obstacle):
         """allows for player movement via keypresses"""
         # this checks for any pressed keys and includes held keys
         # I have changed the key press values to variables set in the init to allow for both player classes to change it
         # it also prevents players from leaving the border by checking if moving would make them exit the dimensions of the window.
         if pygame.key.get_pressed()[self.up] and self.position[1] - self.moveSpeed > 0:
-            # changes position based on set speed of player
-            self.position[1] -= self.moveSpeed 
-            # updates character sprite to reflect direction
-            self.playerCurrent = self.playerModelUp
+            # checks if the position is below or above the obstacle and if moving would place the player on top.
+            if self.position[0] > obstacle.position[0] and self.position[0] < obstacle.position[0]+obstacle.dimension[0] and self.position[1] - self.moveSpeed < obstacle.position[1]:
+                pass
+            else:
+                # changes position based on set speed of player
+                self.position[1] -= self.moveSpeed 
+                # updates character sprite to reflect direction
+                self.playerCurrent = self.playerModelUp
         elif pygame.key.get_pressed()[self.down] and self.position[1] + self.moveSpeed < 450:
+            
             self.position[1] += self.moveSpeed 
             self.playerCurrent = self.playerModelDown
         elif pygame.key.get_pressed()[self.left] and self.position[0] - self.moveSpeed > 0:
-            self.position[0] -= self.moveSpeed 
-            self.playerCurrent = self.playerModelLeft
+            if self.position[1] > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] - self.moveSpeed < obstacle.position[0] and self.position[0] > obstacle.position[0]:
+                pass
+            else:
+                self.position[0] -= self.moveSpeed 
+                self.playerCurrent = self.playerModelLeft
         elif pygame.key.get_pressed()[self.right] and self.position[0] + self.moveSpeed < 850:
-            self.position[0] += self.moveSpeed 
-            self.playerCurrent = self.playerModelRight
+            if self.position[1] > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] + self.moveSpeed + 45 > obstacle.position[0] and self.position[0] < obstacle.position[0]:
+                pass
+            else:
+                self.position[0] += self.moveSpeed 
+                self.playerCurrent = self.playerModelRight

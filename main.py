@@ -24,8 +24,8 @@ def main():
         # pygame colors use RGB tuples, this is white
         screen.fill((255,255,255))
         obstacle.create(screen)
-        enemy.move()
-        player.move()
+        enemy.move(obstacle)
+        player.move(obstacle)
         enemy.draw(screen)
         player.draw(screen)
         # pygame needs the display updated after each change
