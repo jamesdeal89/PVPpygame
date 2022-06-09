@@ -42,13 +42,14 @@ class Avatar():
             self.position[1] += self.moveSpeed 
             self.playerCurrent = self.playerModelDown
         elif pygame.key.get_pressed()[self.left] and self.position[0] - self.moveSpeed > 0:
-            if self.position[1] > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] - self.moveSpeed < obstacle.position[0] and self.position[0] > obstacle.position[0]:
+            # checks if player is within y position of obstacle and if moving would cross the boundary
+            if self.position[1]+40 > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] - self.moveSpeed - 30 < obstacle.position[0] and self.position[0] > obstacle.position[0]:
                 pass
             else:
                 self.position[0] -= self.moveSpeed 
                 self.playerCurrent = self.playerModelLeft
         elif pygame.key.get_pressed()[self.right] and self.position[0] + self.moveSpeed < 850:
-            if self.position[1] > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] + self.moveSpeed + 45 > obstacle.position[0] and self.position[0] < obstacle.position[0]:
+            if self.position[1]+40 > obstacle.position[1] and self.position[1] < obstacle.position[1]+obstacle.dimension[1] and self.position[0] + self.moveSpeed + 40 > obstacle.position[0] and self.position[0] < obstacle.position[0]:
                 pass
             else:
                 self.position[0] += self.moveSpeed 
