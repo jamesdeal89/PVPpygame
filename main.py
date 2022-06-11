@@ -12,7 +12,7 @@ pygame.display.set_caption("PYTHON PVP")
 playerHit = pygame.USEREVENT + 1
 enemyHit = pygame.USEREVENT + 2
 
-def checkCollision(player, enemy):
+def checkCollision(player, enemy, obstacle):
     # if any projectiles are in the list for the player
     if player.projectile != None:
         for projectile in player.projectile.projectiles:
@@ -24,6 +24,10 @@ def checkCollision(player, enemy):
                 player.projectile.projectiles.remove(projectile)
                 # raise the pygame event we created for the enemy being hit
                 pygame.event.post(pygame.event.Event(enemyHit))
+            # check if the projectile hit the obstacle
+            if obstacle.obstacle.colliderect(projectile):
+                # remove the projectile 
+                player.projectile.projectiles.remove(projectile)
     # if any projectiles are in the list for the enemy
     if enemy.projectile != None:
         for projectile in enemy.projectile.projectiles:
@@ -35,6 +39,10 @@ def checkCollision(player, enemy):
                 enemy.projectile.projectiles.remove(projectile)
                 # raise the pygame event we created for the player being hit
                 pygame.event.post(pygame.event.Event(playerHit))
+            # check if the projectile hit the obstacle
+            if obstacle.obstacle.colliderect(projectile):
+                # remove the projectile 
+                enemy.projectile.projectiles.remove(projectile)
 
 
 
@@ -58,7 +66,7 @@ def main():
         player.move(obstacle)
         enemy.draw(screen)
         player.draw(screen)
-        checkCollision(player, enemy)
+        checkCollision(player, enemy, obstacle)
         if enemy.projectile != None:
             for projectile in enemy.projectile.projectiles:
                 pygame.draw.rect(screen,(0,0,0),projectile)
