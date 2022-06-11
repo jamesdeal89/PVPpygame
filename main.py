@@ -13,36 +13,34 @@ playerHit = pygame.USEREVENT + 1
 enemyHit = pygame.USEREVENT + 2
 
 def checkCollision(player, enemy, obstacle):
-    # if any projectiles are in the list for the player
-    if player.projectile != None:
-        for projectile in player.projectile.projectiles:
-            # move the projectile by the projectile speed each frame
-            projectile.x += player.projectile.moveSpeed
-            # if the projectile collides with the rect which represents the enemy
-            if enemy.rect.colliderect(projectile):
-                # remove the projectile 
-                player.projectile.projectiles.remove(projectile)
-                # raise the pygame event we created for the enemy being hit
-                pygame.event.post(pygame.event.Event(enemyHit))
-            # check if the projectile hit the obstacle
-            if obstacle.obstacle.colliderect(projectile):
-                # remove the projectile 
-                player.projectile.projectiles.remove(projectile)
-    # if any projectiles are in the list for the enemy
-    if enemy.projectile != None:
-        for projectile in enemy.projectile.projectiles:
-            # move the projectile by the projectile speed each frame
-            projectile.x += enemy.projectile.moveSpeed
-            # if the projectile collides with the rect which represents the player
-            if player.rect.colliderect(projectile):
-                # remove the projectile 
-                enemy.projectile.projectiles.remove(projectile)
-                # raise the pygame event we created for the player being hit
-                pygame.event.post(pygame.event.Event(playerHit))
-            # check if the projectile hit the obstacle
-            if obstacle.obstacle.colliderect(projectile):
-                # remove the projectile 
-                enemy.projectile.projectiles.remove(projectile)
+    # for every projectile for the given player
+    for projectile in player.projectile.projectiles:
+        # move the projectile by the projectile speed each frame
+        projectile.x += player.projectile.moveSpeed
+        # if the projectile collides with the rect which represents the enemy
+        if enemy.rect.colliderect(projectile):
+            # remove the projectile 
+            player.projectile.projectiles.remove(projectile)
+            # raise the pygame event we created for the enemy being hit
+            pygame.event.post(pygame.event.Event(enemyHit))
+        # check if the projectile hit the obstacle
+        if obstacle.obstacle.colliderect(projectile):
+            # remove the projectile 
+            player.projectile.projectiles.remove(projectile)
+    # for every projectile for the given player
+    for projectile in enemy.projectile.projectiles:
+        # move the projectile by the projectile speed each frame
+        projectile.x += enemy.projectile.moveSpeed
+        # if the projectile collides with the rect which represents the player
+        if player.rect.colliderect(projectile):
+            # remove the projectile 
+            enemy.projectile.projectiles.remove(projectile)
+            # raise the pygame event we created for the player being hit
+            pygame.event.post(pygame.event.Event(playerHit))
+        # check if the projectile hit the obstacle
+        if obstacle.obstacle.colliderect(projectile):
+            # remove the projectile 
+            enemy.projectile.projectiles.remove(projectile)
 
 
 
@@ -56,9 +54,8 @@ def main():
         # this creates a framerate of 60 frames per second
         pygame.time.Clock().tick(60)
         for event in pygame.event.get():
-            # stops program if player clicks 'x' in window
-            if event.type == pygame.QUIT:
-                run = False
+            player.checkAttack(event)
+            enemy.checkAttack(event)
         # pygame colors use RGB tuples, this is white
         screen.fill((255,255,255))
         obstacle.create(screen)
@@ -67,12 +64,10 @@ def main():
         enemy.draw(screen)
         player.draw(screen)
         checkCollision(player, enemy, obstacle)
-        if enemy.projectile != None:
-            for projectile in enemy.projectile.projectiles:
-                pygame.draw.rect(screen,(0,0,0),projectile)
-        if player.projectile != None:
-            for projectile in player.projectile.projectiles:
-                pygame.draw.rect(screen,(0,0,0), projectile)
+        for projectile in enemy.projectile.projectiles:
+            pygame.draw.rect(screen,(0,0,0),projectile)
+        for projectile in player.projectile.projectiles:
+            pygame.draw.rect(screen,(0,0,0), projectile)
         # pygame needs the display updated after each change
         pygame.display.update()
 

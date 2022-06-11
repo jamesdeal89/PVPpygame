@@ -1,4 +1,5 @@
 import pygame
+import sys
 from projectile import Projectile
 
 class Avatar():
@@ -26,6 +27,14 @@ class Avatar():
         # 'bit' places an object onto the screen based on coordinates from the top left corner
         screen.blit(self.playerCurrent, ((self.position[0],self.position[1]), (40,50)))
     
+    def checkAttack(self, event):
+        # checks if the player pressed the 'shoot' key but do not accept holding down input
+        # allows quiting of the game window via 'x' button
+        if event.type == pygame.QUIT:
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == self.shoot:
+                self.projectile.create(self.current,self.position)
 
     def move(self, obstacle):
         """allows for player movement via keypresses"""
@@ -62,6 +71,4 @@ class Avatar():
                 self.position[0] += self.moveSpeed 
                 self.playerCurrent = self.playerModelRight
                 self.current = "E"
-        # checks if the player pressed the 'shoot' key
-        elif pygame.key.get_pressed()[self.shoot]:
-            self.projectile.create(self.current,self.position)
+
