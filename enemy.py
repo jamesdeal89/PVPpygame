@@ -6,7 +6,7 @@ import os
 class Enemy(Avatar):
     def __init__(self):
         # initializing inherited class and changing movement keymap and changing starting coordinates
-        super().__init__(up=pygame.K_w,down=pygame.K_s,left=pygame.K_a,right=pygame.K_d, position=[160,220])
+        super().__init__(up=pygame.K_w,down=pygame.K_s,left=pygame.K_a,right=pygame.K_d, shoot=pygame.K_LCTRL, position=[160,220])
         # loads an image file from the computer
         self.playerModelUp = pygame.image.load(os.path.join('assets','EN_UP.gif'))
         # resizes image file

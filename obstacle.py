@@ -2,7 +2,7 @@
 import pygame
 
 class Obstacle():
-    def __init__(self, position = [450,70], dimension = [30,300]) -> None:
+    def __init__(self, position = [450,70], dimension = [3,300]) -> None:
         self.position = position
         self.dimension = dimension
         
