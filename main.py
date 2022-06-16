@@ -38,6 +38,7 @@ def checkCollision(player, enemy, obstacle):
     # for every projectile for the given player
     for projectile in enemy.projectile.projectiles:
         # move the projectile by the projectile speed each frame
+        # based on player direction when the projectile was created
         if projectile[1] == "N":
             projectile[0].y -= enemy.projectile.moveSpeed
         elif projectile[1] == "E":
