@@ -13,32 +13,47 @@ playerHit = pygame.USEREVENT + 1
 enemyHit = pygame.USEREVENT + 2
 
 def checkCollision(player, enemy, obstacle):
-    # for every projectile for the given player
+    # for every projectile for the given player 
     for projectile in player.projectile.projectiles:
         # move the projectile by the projectile speed each frame
-        projectile.x += player.projectile.moveSpeed
+        # based on which direction the player was facing when projectile created
+        if projectile[1] == "N":
+            projectile[0].y -= enemy.projectile.moveSpeed
+        elif projectile[1] == "E":
+            projectile[0].x += enemy.projectile.moveSpeed
+        elif projectile[1] == "S":
+            projectile[0].y += enemy.projectile.moveSpeed
+        elif projectile[1] == "W":
+            projectile[0].x -= enemy.projectile.moveSpeed
         # if the projectile collides with the rect which represents the enemy
-        if enemy.rect.colliderect(projectile):
+        if enemy.rect.colliderect(projectile[0]):
             # remove the projectile 
             player.projectile.projectiles.remove(projectile)
             # raise the pygame event we created for the enemy being hit
             pygame.event.post(pygame.event.Event(enemyHit))
         # check if the projectile hit the obstacle
-        if obstacle.obstacle.colliderect(projectile):
+        if obstacle.obstacle.colliderect(projectile[0]):
             # remove the projectile 
             player.projectile.projectiles.remove(projectile)
     # for every projectile for the given player
     for projectile in enemy.projectile.projectiles:
         # move the projectile by the projectile speed each frame
-        projectile.x += enemy.projectile.moveSpeed
+        if projectile[1] == "N":
+            projectile[0].y -= enemy.projectile.moveSpeed
+        elif projectile[1] == "E":
+            projectile[0].x += enemy.projectile.moveSpeed
+        elif projectile[1] == "S":
+            projectile[0].y += enemy.projectile.moveSpeed
+        elif projectile[1] == "W":
+            projectile[0].x -= enemy.projectile.moveSpeed
         # if the projectile collides with the rect which represents the player
-        if player.rect.colliderect(projectile):
+        if player.rect.colliderect(projectile[0]):
             # remove the projectile 
             enemy.projectile.projectiles.remove(projectile)
             # raise the pygame event we created for the player being hit
             pygame.event.post(pygame.event.Event(playerHit))
         # check if the projectile hit the obstacle
-        if obstacle.obstacle.colliderect(projectile):
+        if obstacle.obstacle.colliderect(projectile[0]):
             # remove the projectile 
             enemy.projectile.projectiles.remove(projectile)
 
@@ -65,9 +80,9 @@ def main():
         player.draw(screen)
         checkCollision(player, enemy, obstacle)
         for projectile in enemy.projectile.projectiles:
-            pygame.draw.rect(screen,(0,0,0),projectile)
+            pygame.draw.rect(screen,(0,0,0),projectile[0])
         for projectile in player.projectile.projectiles:
-            pygame.draw.rect(screen,(0,0,0), projectile)
+            pygame.draw.rect(screen,(0,0,0), projectile[0])
         # pygame needs the display updated after each change
         pygame.display.update()
 
