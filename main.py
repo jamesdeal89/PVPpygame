@@ -5,7 +5,7 @@ import pygame
 import sys
 import time
 
-# TODO: make endscreen
+
 # TODO: make limited attacks
 # TODO: make healing hearts
 # TODO: make multiple stages
