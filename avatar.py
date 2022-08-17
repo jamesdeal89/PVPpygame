@@ -19,6 +19,26 @@ class Avatar():
         self.shoot = shoot
         self.projectile = Projectile()
     
+    @property
+    def moveSpeed(self):
+        return self._moveSpeed
+
+    @moveSpeed.setter
+    def moveSpeed(self,speed):
+        self._moveSpeed = speed
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self,health):
+        self._health = health
+        if self._health <= 25:
+            # reduce the players speed if they're 25 health or lower
+            self.moveSpeed = 2
+
+
 
     def draw(self,screen):
         """draws player character to the screen"""
