@@ -89,11 +89,11 @@ def lives(event, player, enemy):
 
 
 def healthBars(avatar):
-    # adjusts text to be rendered on screen for health bars
+    # adjusts text to be rendered on screen for health bars and ammo
     if type(avatar) == Enemy:
-        bar = my_font.render("Left: " + str(avatar.health), False, (0, 0, 0))
+        bar = my_font.render("Left: " + str(avatar.health) + " Ammo: " + str(avatar.ammo), False, (0, 0, 0))
     elif type(avatar) == Player:
-        bar = my_font.render("Right: " + str(avatar.health), False, (0, 0, 0))
+        bar = my_font.render("Right: " + str(avatar.health) + " Ammo: " + str(avatar.ammo), False, (0, 0, 0))
     return bar
 
 
@@ -130,7 +130,7 @@ def main():
         for projectile in player.projectile.projectiles:
             pygame.draw.rect(screen,(0,0,0), projectile[0])
         # blit health bars to the screen
-        screen.blit(healthBars(player), (740,0))
+        screen.blit(healthBars(player), (700,0))
         screen.blit(healthBars(enemy), (10,0))
         # pygame needs the display updated after each change
         pygame.display.update()

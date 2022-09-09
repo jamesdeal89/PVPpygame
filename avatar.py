@@ -4,7 +4,7 @@ from projectile import Projectile
 
 class Avatar():
     def __init__(self, up = pygame.K_UP, down = pygame.K_DOWN, left = pygame.K_LEFT, right = pygame.K_RIGHT, shoot = pygame.K_RCTRL, 
-    health = 100, attack = 25, moveSpeed = 4, position = [660,220], color = (0,0,0), width=20, current="N", ammo=5) -> None:
+    health = 100, attack = 25, moveSpeed = 4, position = [660,220], color = (0,0,0), width=20, current="N", ammo=8) -> None:
         self.health = health
         self.attack = attack
         self.moveSpeed = moveSpeed
