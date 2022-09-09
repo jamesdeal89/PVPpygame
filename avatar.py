@@ -4,7 +4,7 @@ from projectile import Projectile
 
 class Avatar():
     def __init__(self, up = pygame.K_UP, down = pygame.K_DOWN, left = pygame.K_LEFT, right = pygame.K_RIGHT, shoot = pygame.K_RCTRL, 
-    health = 100, attack = 25, moveSpeed = 4, position = [660,220], color = (0,0,0), width=20, current="N") -> None:
+    health = 100, attack = 25, moveSpeed = 4, position = [660,220], color = (0,0,0), width=20, current="N", ammo=5) -> None:
         self.health = health
         self.attack = attack
         self.moveSpeed = moveSpeed
@@ -18,7 +18,16 @@ class Avatar():
         self.current = current
         self.shoot = shoot
         self.projectile = Projectile()
+        self.ammo = ammo
     
+    @property
+    def ammo(self):
+        return self._ammo
+
+    @ammo.setter
+    def ammo(self,ammo):
+        self._ammo = ammo
+
     @property
     def moveSpeed(self):
         return self._moveSpeed
@@ -54,7 +63,7 @@ class Avatar():
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == self.shoot:
-                self.projectile.create(self.current,self.position)
+                self.projectile.create(self.current,self.position,self.ammo,self)
 
     def move(self, obstacle):
         """allows for player movement via keypresses"""

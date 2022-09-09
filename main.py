@@ -6,7 +6,7 @@ import sys
 import time
 
 
-# TODO: make limited attacks
+# TODO: make ammo packs
 # TODO: make healing hearts
 # TODO: make multiple stages
 
