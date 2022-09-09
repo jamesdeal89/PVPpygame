@@ -1,6 +1,7 @@
 from enemy import Enemy
 from player import Player
 from obstacle import Obstacle
+from ammo import AmmoPack
 import pygame
 import sys
 import time
@@ -8,6 +9,7 @@ import time
 
 # TODO: make ammo packs
 # TODO: make healing hearts
+# TODO: make cooldown for shooting (1 second cooldown between shots?)
 # TODO: make multiple stages
 
 
@@ -71,6 +73,11 @@ def checkCollision(player, enemy, obstacle):
             # remove the projectile 
             enemy.projectile.projectiles.remove(projectile)
 
+def checkAmmoPack(player, enemy, pack):
+    # checks if either player has colided with an ammo pack and change their ammo level
+    pass
+
+
 
 def lives(event, player, enemy):
     # uses the pygame events we established in checkCollision() to adjust the health attribute
@@ -106,6 +113,7 @@ def main():
     player = Player()
     enemy = Enemy()
     obstacle = Obstacle()
+    ammo = AmmoPack()
     run = True
     while run == True:
         # this creates a framerate of 60 frames per second
@@ -120,6 +128,7 @@ def main():
         # pygame colors use RGB tuples, this is white
         screen.fill((255,255,255))
         obstacle.create(screen)
+        ammo.create(screen)
         enemy.move(obstacle)
         player.move(obstacle)
         enemy.draw(screen)
