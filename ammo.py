@@ -3,7 +3,7 @@ import random
 import pygame
 
 class AmmoPack():
-    def __init__(self, size = 5):
+    def __init__(self, size = 3):
         self.size = size
         self.x = random.randint(0, 900)
         self.y = random.randint(0, 500)
