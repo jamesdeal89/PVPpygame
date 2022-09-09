@@ -3,10 +3,10 @@ import random
 import pygame
 
 class AmmoPack():
-    def __init__(self, size = 5, x= random.randint(0, 900), y = random.randint(0, 500)):
+    def __init__(self, size = 5):
         self.size = size
-        self.x = x
-        self.y = y
+        self.x = random.randint(0, 900)
+        self.y = random.randint(0, 500)
 
     @property
     def x(self):
@@ -33,8 +33,9 @@ class AmmoPack():
         self._size = amount
 
     def create(self, screen):
-        pack = pygame.Rect(self.x,self.y,15,15)
-        pygame.draw.rect(screen, (0,255,0), pack)
+        print(self.x, self.y)
+        self.pack = pygame.Rect(self.x,self.y,15,15)
+        pygame.draw.rect(screen, (0,255,0), self.pack)
 
     def pickedUp(self):
         # TODO: if an ammo pack is picked up, remove ammopack and generate a new location

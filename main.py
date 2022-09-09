@@ -75,7 +75,13 @@ def checkCollision(player, enemy, obstacle):
 
 def checkAmmoPack(player, enemy, pack):
     # checks if either player has colided with an ammo pack and change their ammo level
-    pass
+    # returns True which main() uses to create a new ammo pack instance
+    if player.rect.colliderect(pack.pack):
+        player.ammo += pack.size
+        return True
+    elif enemy.rect.colliderect(pack.pack):
+        enemy.ammo += pack.size
+        return True
 
 
 
@@ -134,6 +140,10 @@ def main():
         enemy.draw(screen)
         player.draw(screen)
         checkCollision(player, enemy, obstacle)
+        # if pack has been picked up, generate new pack
+        if checkAmmoPack(player, enemy, ammo) == True:
+            print("picked up pack")
+            ammo = AmmoPack()
         for projectile in enemy.projectile.projectiles:
             pygame.draw.rect(screen,(0,0,0),projectile[0])
         for projectile in player.projectile.projectiles:
